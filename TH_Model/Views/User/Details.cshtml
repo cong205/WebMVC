@@ -1,0 +1,23 @@
+﻿<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <h2 class="mb-4">Thông tin người dùng</h2>
+
+    @if (ViewBag.User != null)
+    {
+        <div class="card shadow-sm" style="max-width: 500px;">
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.User.Name</h5>
+                <p class="card-text"><strong>Id:</strong> @ViewBag.User.Id</p>
+                <p class="card-text"><strong>Address:</strong> @ViewBag.User.Address</p>
+                <p class="card-text"><strong>Email:</strong> @ViewBag.User.Email</p>
+                <a asp-controller="User" asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">Không tìm thấy người dùng.</div>
+        <a asp-controller="User" asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+    }
+</div>

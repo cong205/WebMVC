@@ -1,0 +1,14 @@
+# Visual Studio cache folders
+.vs/
+*.user
+*.suo
+
+# Build results
+bin/
+obj/
+
+# Other temporary files
+*.cache
+*.log
+*.vsidx
+TestResults/

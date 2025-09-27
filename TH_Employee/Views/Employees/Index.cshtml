@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TH_Employee.Models.Employee>
+
+<div class="container mt-4">
+    <h2 class="mb-3">Danh sách nhân viên</h2>
+
+    <form method="get" asp-action="Index" class="mb-3">
+        <div class="row g-2">
+            <div class="col-auto">
+                <select name="status" class="form-select">
+                    <option value="">-- Tất cả --</option>
+                    <option value="true">Đang làm</option>
+                    <option value="false">Nghỉ</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-primary">Lọc</button>
+            </div>
+        </div>
+    </form>
+
+    <a asp-action="Create" class="btn btn-primary mb-3">
+        <i class="bi bi-plus-circle"></i> Thêm nhân viên
+    </a>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Tên</th>
+                <th>Giới tính</th>
+                <th>SĐT</th>
+                <th>Email</th>
+                <th>Lương</th>
+                <th>Trạng thái</th>
+                <th class="text-center">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FullName</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>@item.Salary.ToString("N0") đ</td>
+                    <td>
+                        @if (item.Status)
+                        {
+                            <span class="badge bg-success">Đang làm</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Nghỉ</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Xem</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
