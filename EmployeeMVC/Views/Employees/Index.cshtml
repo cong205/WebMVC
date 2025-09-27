@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EmployeeMVC.Models.Employee>
+@{
+    ViewData["Title"] = "Employees List";
+}
+<h2 class="mb-3">Employees List</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">➕ Add New Employee</a>
+</p>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Full Name</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.FullName</td>
+                    <td>@emp.Gender</td>
+                    <td>@emp.Phone</td>
+                    <td>@emp.Email</td>
+                    <td>@emp.Salary</td>
+                    <td>@(emp.Status ? "Active" : "Inactive")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@emp.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@emp.Id" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@emp.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">No employees found</td>
+            </tr>
+        }
+    </tbody>
+</table>

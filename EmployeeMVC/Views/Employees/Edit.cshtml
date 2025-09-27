@@ -1,0 +1,41 @@
+﻿@model EmployeeMVC.Models.Employee
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+<h2>Edit Employee</h2>
+
+<form asp-action="Edit" class="row g-3">
+    <input type="hidden" asp-for="Id" />
+    <div class="col-md-6">
+        <label asp-for="FullName" class="form-label"></label>
+        <input asp-for="FullName" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Gender" class="form-label"></label>
+        <select asp-for="Gender" class="form-select">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Salary" class="form-label"></label>
+        <input asp-for="Salary" class="form-control" />
+    </div>
+    <div class="col-md-6 form-check mt-4">
+        <input asp-for="Status" class="form-check-input" />
+        <label asp-for="Status" class="form-check-label"></label>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">✔ Update</button>
+        <a asp-action="Index" class="btn btn-secondary">⬅ Back</a>
+    </div>
+</form>
