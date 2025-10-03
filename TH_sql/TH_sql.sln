@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TH_sql", "TH_sql.csproj", "{75437A88-AF29-4DC5-8715-3366DE40BC11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75437A88-AF29-4DC5-8715-3366DE40BC11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75437A88-AF29-4DC5-8715-3366DE40BC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75437A88-AF29-4DC5-8715-3366DE40BC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75437A88-AF29-4DC5-8715-3366DE40BC11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C9AF4B1E-D0AA-4992-AA67-15BA012785EF}
+	EndGlobalSection
+EndGlobal
