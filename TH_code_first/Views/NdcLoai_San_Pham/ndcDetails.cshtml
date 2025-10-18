@@ -1,0 +1,26 @@
+﻿@model TH_code_first.Models.NdcLoai_San_Pham
+
+@{
+    ViewData["Title"] = "Chi tiết loại sản phẩm";
+}
+
+<h2>Chi tiết loại sản phẩm</h2>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">Mã loại</dt>
+    <dd class="col-sm-10">@Html.DisplayFor(m => m.ndcMaLoai)</dd>
+
+    <dt class="col-sm-2">Tên loại</dt>
+    <dd class="col-sm-10">@Html.DisplayFor(m => m.ndcTenLoai)</dd>
+
+    <dt class="col-sm-2">Trạng thái</dt>
+    <dd class="col-sm-10">
+        @(Model.ndcTrangThai ? "Hoạt động" : "Ngừng hoạt động")
+    </dd>
+</dl>
+
+<div>
+    <a asp-action="ndcEdit" asp-route-id="@Model.ndcID" class="btn btn-warning">Sửa</a>
+    <a asp-action="ndcIndex" class="btn btn-secondary">Quay lại danh sách</a>
+</div>
