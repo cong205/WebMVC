@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <hr />
+
+    <div>
+        <label for="txtFrom">From</label>
+        <input type="text" name="txtFrom" id="txtFrom" value="NguyenDinhCong" />
+    </div>
+    <hr />
+    <input type="button" value=">>" />
+    <hr />
+    <div>
+        <label for="txtTo">To</label>
+        <input type="text" name="txtTo" id="txtTo" value="Cong" />
+    </div>
+</div>
+
+<div>
+    <h2>Chọn màu chữ</h2>
+    <div class="btn">
+        <button data-value="red">Đỏ</button>
+        <button data-value="blue">Xanh</button>
+        <button data-value="yellow">Vàng</button>
+        <button data-value="violet">Tím</button>
+    </div>
+    <p>
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa <br />
+        bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb <br />
+        ccccccccccccccccccccccccccccccccccccccccc
+    </p>
+</div>
+
+@section NguyenDinhCongScripts {
+    <script>
+        $(document).ready(function () {
+            console.log('Running...');
+
+            // Sự kiện nút >>
+            $('input[type="button"]').click(function () {
+                console.log('clicked...');
+                let valFrom = $('#txtFrom').val();
+                let txtValFrom = $('label[for="txtFrom"]').text();
+
+                $('label[for="txtTo"]').html(txtValFrom);
+                $('#txtTo').val(valFrom);
+            });
+
+            // Gõ bên From tự động cập nhật To
+            $('input[type="text"]').keyup(function () {
+                let valFrom = $(this).val();
+                $(this)
+                    .parent()
+                    .siblings('div')
+                    .children('input[type="text"]')
+                    .val(valFrom);
+            });
+
+            // Đặt màu cho các nút
+            $('.btn button').each(function () {
+                let valColor = $(this).attr('data-value');
+                $(this).css({
+                    'color': valColor,
+                    'width': '10rem',
+                    'padding': '1rem'
+                });
+            });
+
+            // Khi click nút đổi màu đoạn văn
+            $('.btn button').click(function () {
+                let selectedColor = $(this).attr('data-value');
+                $('p').css('color', selectedColor);
+            });
+        });
+    </script>
+}

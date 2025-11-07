@@ -1,0 +1,49 @@
+﻿@model ndc_231230723_de01.Models.NdcComputer
+
+@{
+    ViewData["Title"] = "Thêm mới máy tính";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="NdcCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="ndcComName" class="form-label"></label>
+                <input asp-for="ndcComName" class="form-control" placeholder="Nhập tên máy tính" />
+                <span asp-validation-for="ndcComName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ndcComPrice" class="form-label"></label>
+                <input asp-for="ndcComPrice" class="form-control" placeholder="Nhập giá (VND)" />
+                <span asp-validation-for="ndcComPrice" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ndcComImage" class="form-label"></label>
+                <input asp-for="ndcComImage" class="form-control" placeholder="Nhập URL ảnh" />
+                <span asp-validation-for="ndcComImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" asp-for="ndcComStatus" />
+                <label class="form-check-label" asp-for="ndcComStatus"></label>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success me-2">Tạo mới</button>
+                <a asp-action="NdcIndex" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

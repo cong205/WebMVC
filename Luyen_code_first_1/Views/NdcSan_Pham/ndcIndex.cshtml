@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Luyen_code_first_1.Models.NdcSan_Pham>
+
+@{
+    ViewData["Title"] = "Danh sách sản phẩm";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold text-primary">
+            <i class="fa-solid fa-boxes"></i> Danh sách sản phẩm
+        </h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fa-solid fa-plus me-1"></i> Thêm sản phẩm mới
+        </a>
+    </div>
+
+    <div class="card shadow-sm rounded-3">
+        <div class="card-body">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Mã sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá (VNĐ)</th>
+                        <th>Trạng thái</th>
+                        <th>Loại sản phẩm</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ndcMaSanPham</td>
+                            <td class="fw-semibold">@item.ndcTenSanPham</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.ndcHinhAnh))
+                                {
+                                    <img src="~/images/@item.ndcHinhAnh" alt="Ảnh sản phẩm" width="60" height="60" class="rounded shadow-sm" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted fst-italic">Chưa có ảnh</span>
+                                }
+                            </td>
+                            <td>@item.ndcSoLuong</td>
+                            <td>@string.Format("{0:N0}", item.ndcDonGia)</td>
+                            <td>
+                                @if (item.ndcTrangThai)
+                                {
+                                    <span class="badge bg-success">Còn hàng</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Hết hàng</span>
+                                }
+                            </td>
+                            <td>@item.ndcLoai_San_Pham?.ndcTenLoai</td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-1 flex-wrap">
+                                    <a asp-action="Edit" asp-route-id="@item.ndcId" class="btn btn-sm btn-warning text-dark">
+                                        <i class="fa-solid fa-pen me-1"></i> Sửa
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.ndcId" class="btn btn-sm btn-info text-white">
+                                        <i class="fa-solid fa-circle-info me-1"></i> Chi tiết
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.ndcId" class="btn btn-sm btn-danger">
+                                        <i class="fa-solid fa-trash me-1"></i> Xóa
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"
+            integrity="sha512-k5gP4shOatDFQm8a+ZvdztNnWZkT/4L3kBHw7W/4rYzY4qkQ/FH8+lx1stjDN4dPqZcbmZbM4RhEjwRHChpmtw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}

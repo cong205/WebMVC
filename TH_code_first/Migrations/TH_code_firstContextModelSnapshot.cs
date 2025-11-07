@@ -63,16 +63,8 @@ namespace TH_code_first.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("ndcLoaiSanPhamID")
+                    b.Property<int>("ndcMaLoai")
                         .HasColumnType("int");
-
-                    b.Property<int>("ndcLoai_San_PhamndcID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ndcMaLoai")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ndcMaSanPham")
                         .IsRequired()
@@ -92,7 +84,7 @@ namespace TH_code_first.Migrations
 
                     b.HasKey("ndcID");
 
-                    b.HasIndex("ndcLoai_San_PhamndcID");
+                    b.HasIndex("ndcMaLoai");
 
                     b.ToTable("ndcSan_Phams");
                 });
@@ -101,7 +93,7 @@ namespace TH_code_first.Migrations
                 {
                     b.HasOne("TH_code_first.Models.NdcLoai_San_Pham", "ndcLoai_San_Pham")
                         .WithMany("ndcSanPhams")
-                        .HasForeignKey("ndcLoai_San_PhamndcID")
+                        .HasForeignKey("ndcMaLoai")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

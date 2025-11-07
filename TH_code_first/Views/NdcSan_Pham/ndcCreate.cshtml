@@ -1,0 +1,68 @@
+﻿@model TH_code_first.Models.NdcSan_Pham
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>NdcSan_Pham</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ndcCreate" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ndcMaSanPham" class="control-label"></label>
+                <input asp-for="ndcMaSanPham" class="form-control" />
+                <span asp-validation-for="ndcMaSanPham" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcTenSanPham" class="control-label"></label>
+                <input asp-for="ndcTenSanPham" class="form-control" />
+                <span asp-validation-for="ndcTenSanPham" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcHinhAnh" class="control-label"></label>
+                <input asp-for="ndcHinhAnh" class="form-control" />
+                <span asp-validation-for="ndcHinhAnh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcSoLuong" class="control-label"></label>
+                <input asp-for="ndcSoLuong" class="form-control" />
+                <span asp-validation-for="ndcSoLuong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcDonGia" class="control-label"></label>
+                <input asp-for="ndcDonGia" class="form-control" />
+                <span asp-validation-for="ndcDonGia" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ndcTrangThai" /> @Html.DisplayNameFor(model => model.ndcTrangThai)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcMaLoai" class="control-label">Loại sản phẩm</label>
+                <select asp-for="ndcMaLoai" class="form-control"
+                        asp-items="ViewBag.ndcLoaiSanPhamList">
+                    <option value="">-- Chọn loại sản phẩm --</option>
+                </select>
+                <span asp-validation-for="ndcMaLoai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ndcIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

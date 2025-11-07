@@ -1,0 +1,42 @@
+﻿@model ndc_231230723_de01.Models.NdcComputer
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>NdcComputer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ndcComName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ndcComName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ndcComPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ndcComPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ndcComImage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ndcComImage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ndcComStatus)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ndcComStatus)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="NdcEdit" asp-route-id="@Model?.ndcComId">Edit</a> |
+    <a asp-action="NdcIndex">Back to List</a>
+</div>

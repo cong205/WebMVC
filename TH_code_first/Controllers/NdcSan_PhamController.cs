@@ -19,13 +19,13 @@ namespace TH_code_first.Controllers
         }
 
         // GET: NdcSan_Pham
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> ndcIndex()
         {
             return View(await _context.ndcSan_Phams.ToListAsync());
         }
 
         // GET: NdcSan_Pham/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> ndcDetails(int? id)
         {
             if (id == null)
             {
@@ -43,29 +43,41 @@ namespace TH_code_first.Controllers
         }
 
         // GET: NdcSan_Pham/Create
-        public IActionResult Create()
+        public IActionResult ndcCreate()
         {
+            ViewBag.ndcLoaiSanPhamList = new SelectList(_context.ndcLoai_San_Phams, "ndcID", "ndcTenLoai");
             return View();
         }
 
-        // POST: NdcSan_Pham/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ndcID,ndcMaSanPham,ndcTenSanPham,ndcHinhAnh,ndcSoLuong,ndcDonGia,ndcMaLoai,ndcTrangThai,ndcLoaiSanPhamID")] NdcSan_Pham ndcSan_Pham)
+        public async Task<IActionResult> ndcCreate([Bind("ndcID,ndcMaSanPham,ndcTenSanPham,ndcHinhAnh,ndcSoLuong,ndcDonGia,ndcTrangThai,ndcLoaiSanPhamID")] NdcSan_Pham ndcSan_Pham)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                              .Select(e => e.ErrorMessage);
+                Console.WriteLine(string.Join(" | ", errors)); // hoặc xem trong Output
+            }
+            
             if (ModelState.IsValid)
             {
+                var loai = _context.ndcLoai_San_Phams
+                   .FirstOrDefault(l => l.ndcID == ndcSan_Pham.ndcMaLoai);
+
                 _context.Add(ndcSan_Pham);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ndcIndex));
+
             }
+
+            ViewBag.ndcLoaiSanPhamList = new SelectList(_context.ndcLoai_San_Phams, "ndcID", "ndcTenLoai");
             return View(ndcSan_Pham);
         }
 
+
         // GET: NdcSan_Pham/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> ndcEdit(int? id)
         {
             if (id == null)
             {
@@ -85,7 +97,7 @@ namespace TH_code_first.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ndcID,ndcMaSanPham,ndcTenSanPham,ndcHinhAnh,ndcSoLuong,ndcDonGia,ndcMaLoai,ndcTrangThai,ndcLoaiSanPhamID")] NdcSan_Pham ndcSan_Pham)
+        public async Task<IActionResult> ndcEdit(int id, [Bind("ndcID,ndcMaSanPham,ndcTenSanPham,ndcHinhAnh,ndcSoLuong,ndcDonGia,ndcMaLoai,ndcTrangThai,ndcLoaiSanPhamID")] NdcSan_Pham ndcSan_Pham)
         {
             if (id != ndcSan_Pham.ndcID)
             {
@@ -110,13 +122,13 @@ namespace TH_code_first.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ndcIndex));
             }
             return View(ndcSan_Pham);
         }
 
         // GET: NdcSan_Pham/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> ndcDelete(int? id)
         {
             if (id == null)
             {
@@ -145,7 +157,7 @@ namespace TH_code_first.Controllers
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ndcIndex));
         }
 
         private bool NdcSan_PhamExists(int id)

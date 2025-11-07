@@ -1,0 +1,49 @@
+﻿@model ndc_231230723_de01.Models.NdcComputer
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>NdcComputer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NdcEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ndcComId" />
+            <div class="form-group">
+                <label asp-for="ndcComName" class="control-label"></label>
+                <input asp-for="ndcComName" class="form-control" />
+                <span asp-validation-for="ndcComName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcComPrice" class="control-label"></label>
+                <input asp-for="ndcComPrice" class="form-control" />
+                <span asp-validation-for="ndcComPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ndcComImage" class="control-label"></label>
+                <input asp-for="ndcComImage" class="form-control" />
+                <span asp-validation-for="ndcComImage" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="ndcComStatus" /> @Html.DisplayNameFor(model => model.ndcComStatus)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="NdcIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

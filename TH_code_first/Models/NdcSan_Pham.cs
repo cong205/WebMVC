@@ -23,16 +23,12 @@ namespace TH_code_first.Models
 
         public decimal ndcDonGia { get; set; }
 
-        [Required]
-        [StringLength(20)]
-        public string ndcMaLoai { get; set; } // khóa ngoại logic (hiển thị)
-
         public bool ndcTrangThai { get; set; }
 
-        // Khóa ngoại liên kết đến LoaiSanPham
-        [ForeignKey("NdcLoai_San_Pham")]
-        public int ndcLoaiSanPhamID { get; set; }
+        [Display(Name = "Loại sản phẩm")]
+        [ForeignKey("ndcLoai_San_Pham")]
+        public int ndcMaLoai { get; set; }
 
-        public virtual NdcLoai_San_Pham ndcLoai_San_Pham { get; set; }
+        public virtual NdcLoai_San_Pham? ndcLoai_San_Pham { get; set; }
     }
 }
