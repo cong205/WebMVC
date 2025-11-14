@@ -8,7 +8,7 @@ namespace Bai_TH_1.Controllers
 {
     public class StudentController : Controller
     {
-        private List<Student> listStudents = new List<Student>();
+        private static List<Student> listStudents = new List<Student>();
 
         public StudentController()
         {
@@ -60,9 +60,21 @@ namespace Bai_TH_1.Controllers
         [HttpPost]
         public IActionResult Create(Student s)
         {
-            s.Id = listStudents.Last().Id + 1;
-            listStudents.Add(s);
-            return View("Index", listStudents);
+            if (ModelState.IsValid)
+            {
+                s.Id = listStudents.Last().Id + 1;
+                listStudents.Add(s);
+                return View("Index", listStudents);
+            }
+            ViewBag.AllGenders = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
+            ViewBag.AllBranches = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "IT", Value = Branch.IT.ToString() },
+                new SelectListItem { Text = "BE", Value = Branch.BE.ToString() },
+                new SelectListItem { Text = "CE", Value = Branch.CE.ToString() },
+                new SelectListItem { Text = "EE", Value = Branch.EE.ToString() }
+            };
+            return View(s);
         }
     }
 }
