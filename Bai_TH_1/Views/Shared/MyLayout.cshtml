@@ -22,20 +22,64 @@
 
             <!-- MAIN CONTENT -->
             <div class="col-md-9 col-lg-10 py-3">
-                <main role="main" class="pb-3">
+                <main role="main" class="pb-3" id="content">
                     @RenderBody()
                 </main>
             </div>
         </div>
+
+        <!-- PAGINATION UI -->
+        <ul class="pagination mt-3">
+            @for (int i = 1; i <= (ViewBag.pageNum ?? 1); i++)
+            {
+                <li class="page-item @(i == (ViewBag.currentPage ?? 1) ? "active" : "")"
+                    data-page="@i"
+                    data-mid="@ViewBag.mid"
+                    data-keyword="@ViewBag.keyword">
+                    <a class="page-link" href="#">@i</a>
+                </li>
+            }
+        </ul>
     </div>
 
-    <!-- FOOTER -->
     <footer class="border-top footer text-muted mt-3">
         @await Html.PartialAsync("Footer")
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/Scripts.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @section Scripts{
+        <script>
+                        $('body').on('click', 'li.page-item', function () {
+                var page = $(this).data("page");
+                var keyword = $("#keyword").val();
+
+                $.ajax({
+                    url: "/Student/Index",
+                    type: "GET",
+                    data: { page: page, keyword: keyword },
+                    success: function (response) {
+                        $("#content").html($(response).find("#content").html());
+                        $("ul.pagination").html($(response).find("ul.pagination").html());
+                    }
+                });
+            });
+
+            $("#btnSearch").click(function () {
+                var keyword = $("#keyword").val();
+                $.ajax({
+                    url: "/Student/Index",
+                    type: "GET",
+                    data: { keyword: keyword, page: 1 },
+                    success: function (response) {
+                        $("#content").html($(response).find("#content").html());
+                        $("ul.pagination").html($(response).find("ul.pagination").html());
+                    }
+                });
+            });
+        </script>
+    }
 </body>
 </html>

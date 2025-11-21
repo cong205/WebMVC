@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace Bai_TH_1.Models
@@ -6,14 +7,16 @@ namespace Bai_TH_1.Models
     public class Student
     {
         public  int Id { get; set; } // Mã sinh viên
+        [Required(ErrorMessage = "Name là bắt buộc")]
         public string? Name { get; set; } // họ tên
         [Required(ErrorMessage = "Email là bắt buộc")]
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}")]
         public string? Email { get; set; } // email
-        [StringLength(100, MinimumLength =8)]
+        [StringLength(20, MinimumLength =3)]
         [Required]
         public string? Password { get; set; } // Mật khẩu
         public Branch Branch { get; set; }// Ngành học
+        [Required]
         public Gender Gender { get; set; }// Giới tính
         public bool IsRegular { get; set; }//Hệ: true-chính qui , false-phi cq 
         [DataType(DataType.MultilineText)]

@@ -1,7 +1,6 @@
 ﻿@model Student
 
 <div>
-    <div asp-validation-summary="All" class="text-danger"></div>
     <form asp-controller="Student" asp-action="Create" method="post" class="mt-3">
         <div style="margin-top:7px;" class="form-group row">
             <label asp-for="Name" class="col-sm-2 col-form-label"></label>
@@ -43,7 +42,6 @@
             <div class="col-sm-10">
                 <input type="checkbox" class="custom-control-input" asp-for="IsRegular" />
             </div>
-            <span asp-validation-for="IsRegular" class="text-danger"></span>
 
         </div>
 
@@ -75,6 +73,7 @@
             <div class="col-sm-10">
                 <textarea asp-for="Address" class="form-control" placeholder="Địa chỉ"></textarea>
             </div>
+            <span asp-validation-for="Address" class="text-danger"></span>
         </div>
 
         <div style="margin-top:10px;" class="form-group row">

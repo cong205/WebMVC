@@ -1,8 +1,9 @@
 ﻿using Bai_TH_1.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Linq;
 using System.Collections.Generic;
+using System.Drawing.Printing;
+using System.Linq;
 
 namespace Bai_TH_1.Controllers
 {
@@ -35,11 +36,33 @@ namespace Bai_TH_1.Controllers
                 Email = "minh@g.com" }
             };
         }
-
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, string keyword = "")
         {
-            return View(listStudents);
+            int pageSize = 3;
+
+            var query = listStudents.AsQueryable();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(x => x.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase)
+                                     || x.Email.Contains(keyword, StringComparison.OrdinalIgnoreCase));
+            }
+
+            int total = query.Count();
+
+            ViewBag.pageNum = (int)Math.Ceiling((double)total / pageSize);
+            ViewBag.currentPage = page;
+            ViewBag.keyword = keyword;
+
+            var data = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return View(data);
         }
+
+
 
         [HttpGet]
         public IActionResult Create()
@@ -64,7 +87,7 @@ namespace Bai_TH_1.Controllers
             {
                 s.Id = listStudents.Last().Id + 1;
                 listStudents.Add(s);
-                return View("Index", listStudents);
+                return RedirectToAction("Index");
             }
             ViewBag.AllGenders = Enum.GetValues(typeof(Gender)).Cast<Gender>().ToList();
             ViewBag.AllBranches = new List<SelectListItem>()
